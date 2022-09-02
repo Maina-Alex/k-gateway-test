@@ -1,0 +1,28 @@
+server:
+  port: 9700
+
+spring:
+  application:
+    name: api-gateway
+
+logging:
+  file:
+    path: /logs
+    name: ${spring.application.name}.log
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    prefer-same-zone-eureka: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://10.20.2.12:9713/eureka
+    fetch-registry: true
+    enabled: on
+
+
+routes:
+  AUTH-SERVER: auth-server
+  WORKFLOW: workflow-service
+

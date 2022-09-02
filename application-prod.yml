@@ -1,0 +1,33 @@
+server:
+  port: 9700
+
+management:
+  endpoint:
+    health:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health
+spring:
+  application:
+    name: api-gateway
+
+
+logging:
+  file:
+    path: /logs
+    name: ${spring.application.name}.log
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+  client:
+    prefer-same-zone-eureka: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://discovery-server:9713/eureka
+    fetch-registry: true
+    enabled: on
