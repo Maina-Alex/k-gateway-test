@@ -10,6 +10,9 @@ import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Alex Maina
  * @created 17/03/2022
@@ -19,12 +22,18 @@ public class CorsFilter implements WebFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         MultiValueMap<String,String> headers= new LinkedMultiValueMap<>();
+//        headers.addAll ("Access-Control-Allow-Origin", List.of ("http://10.20.2.12","https://test-portal.ekenya.co.ke"))
+//        test-portal.ekenya.co.ke
+//        List<String> origins=  List.of ("http://10.20.2.12","https://test-portal.ekenya.co.ke");
+//        if(origins.contains (exchange.getRequest ().getURI ().getHost ())){
+//        }
         headers.add("Access-Control-Allow-Origin", "*");
-        headers.add("Access-Control-Allow-Methods", "*");
-        headers.add("Access-Control-Max-Age", "1728000");
+        headers.add("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
         headers.add("Access-Control-Allow-Headers","*");
         headers.add("Access-Control-Expose-Headers","*");
         headers.add("Access-Control-Allow-Credentials" , "true");
+        headers.add ("Strict-Transport-Security", "max-age=36500 ; includeSubDomains ; preload");
+        headers.add("Content-Security-Policy","default-src 'self' https:; font-src 'self' https: data:; img-src 'self' https: data:; object-src 'none'; script-src https:; style-src 'self' https: 'unsafe-inline'");
         exchange.getResponse().getHeaders().addAll(headers);
 
         if (exchange.getRequest().getMethod() == HttpMethod.OPTIONS) {
