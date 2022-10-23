@@ -1,14 +1,20 @@
 server:
   port: 9700
+  ssl:
+    enabled: true
+    key-alias: gateway-ssl
+    key-store-password: Undefinable##LordsOf{Th@R$ING$Z}
+    key-store: classpath:gateway-ssl.p12
+    key-store-type: PKCS12
 
 spring:
   application:
     name: api-gateway
 
-logging:
-  file:
-    path: /logs
-    name: ${spring.application.name}.log
+#logging:
+#  file:
+#    path: /logs
+#    name: ${spring.application.name}.log
 
 eureka:
   instance:
@@ -17,7 +23,7 @@ eureka:
     prefer-same-zone-eureka: true
     register-with-eureka: true
     serviceUrl:
-      defaultZone: http://10.20.2.12:9713/eureka
+      defaultZone: http://localhost:9713/eureka
     fetch-registry: true
     enabled: on
 
@@ -25,4 +31,5 @@ eureka:
 routes:
   AUTH-SERVER: auth-server
   WORKFLOW: workflow-service
-
+IP:
+  WHITELIST: https://test-portal.ekenya.co.ke, http://10.20.2.12
