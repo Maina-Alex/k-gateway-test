@@ -26,6 +26,8 @@ public class GatewayConfig {
                         .uri("lb://employee-service"))
                 .route(p -> p.path("/api/v1/bank/**")
                         .uri("lb://bank-service"))
+                .route (p-> p.path ("/api/v1/b2c/**")
+                        .uri ("lb://wallet-service"))
                 .build();
     }
     @Bean

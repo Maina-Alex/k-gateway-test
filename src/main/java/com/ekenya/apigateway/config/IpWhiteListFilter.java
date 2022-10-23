@@ -50,6 +50,4 @@ public class IpWhiteListFilter  implements GlobalFilter {
         return chain.filter(exchange);
     }
 
-
-
 }
