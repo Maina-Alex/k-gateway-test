@@ -41,7 +41,7 @@ public class IpThrottlingFilter implements GlobalFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         BucketConfiguration bucketConfiguration = Bucket4j.configurationBuilder()
-                .addLimit(Bandwidth.simple(12, Duration.ofMinutes(1))) // sets a bucket of 10 tokens for a duration of 1 minute
+                .addLimit(Bandwidth.simple(15, Duration.ofMinutes(1))) // sets a bucket of 10 tokens for a duration of 1 minute
                 .build();
         ServerHttpRequest request = exchange.getRequest();
         ServerHttpResponse response = exchange.getResponse();
