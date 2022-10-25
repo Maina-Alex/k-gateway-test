@@ -32,4 +32,4 @@ routes:
   AUTH-SERVER: auth-server
   WORKFLOW: workflow-service
 IP:
-  WHITELIST: ${PORTAL_IP}, ${USSD_IP}
+  WHITELIST: https://${PORTAL_IP}, http://${USSD_IP}
