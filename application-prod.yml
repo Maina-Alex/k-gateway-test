@@ -23,7 +23,7 @@ eureka:
     prefer-same-zone-eureka: true
     register-with-eureka: true
     serviceUrl:
-      defaultZone: http://discovery-server:9713/eureka
+      defaultZone: http://${HOST_IP}:9713/eureka
     fetch-registry: true
     enabled: on
 
