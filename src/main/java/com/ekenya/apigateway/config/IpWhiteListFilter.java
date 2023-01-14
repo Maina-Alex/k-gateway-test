@@ -12,8 +12,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ServerWebExchange;
-import org.springframework.web.server.WebFilter;
-import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 
 import java.util.HashMap;
@@ -31,12 +29,14 @@ import java.util.Map;
 public class IpWhiteListFilter  implements GlobalFilter {
     @Value ("${IP.WHITELIST}")
     private List<String> ipWhiteListRange;
+    @Value ("${IP.WHITELIST-ON}")
+    private boolean whiteListOn;
     private final Gson gson;
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String IP_RANGE= exchange.getRequest ().getURI ().getScheme ()+"://"+exchange.getRequest ().getURI ().getHost ();
         log.info ("IP RANGE {}", IP_RANGE);
-        if(!ipWhiteListRange.contains (IP_RANGE)){
+        if(whiteListOn && !ipWhiteListRange.contains (IP_RANGE)){
             log.info ("Un-whitelisted ip address {}",IP_RANGE);
             Map<String,Object> response= new HashMap<> ();
             response.put ("status",400);

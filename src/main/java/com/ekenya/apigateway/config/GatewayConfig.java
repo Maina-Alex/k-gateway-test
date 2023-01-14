@@ -20,14 +20,12 @@ public class GatewayConfig {
         return routeLocatorBuilder.routes()
                 .route(p -> p.path("/api/v1/oauth/**")
                         .uri("lb://auth-server"))
-                .route(p -> p.path("/api/v1/corporate/**")
+                .route(p -> p.path("/api/v1/corporate/**","/api/v1/mpesa/**")
                         .uri("lb://corporate-service"))
                 .route(p -> p.path("/api/v1/employee/**")
                         .uri("lb://employee-service"))
                 .route(p -> p.path("/api/v1/bank/**")
                         .uri("lb://bank-service"))
-                .route (p-> p.path ("/api/v1/b2c/**")
-                        .uri ("lb://wallet-service"))
                 .build();
     }
     @Bean

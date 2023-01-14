@@ -17,6 +17,7 @@ public class HazelCastConfig {
     Cache<String, GridBucketState> cache(){
         Config config=new Config();
         config.setLiteMember(false);
+        config.getNetworkConfig ().getJoin ().getMulticastConfig ().setEnabled (false);
         CacheSimpleConfig cacheConfig=new CacheSimpleConfig();
         cacheConfig.setName("buckets");
         config.addCacheConfig(cacheConfig);

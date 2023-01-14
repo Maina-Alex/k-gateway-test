@@ -22,11 +22,6 @@ public class CorsFilter implements WebFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         MultiValueMap<String,String> headers= new LinkedMultiValueMap<>();
-//        headers.addAll ("Access-Control-Allow-Origin", List.of ("http://10.20.2.12","https://test-portal.ekenya.co.ke"))
-//        test-portal.ekenya.co.ke
-//        List<String> origins=  List.of ("http://10.20.2.12","https://test-portal.ekenya.co.ke");
-//        if(origins.contains (exchange.getRequest ().getURI ().getHost ())){
-//        }
         headers.add("Access-Control-Allow-Origin", "*");
         headers.add("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
         headers.add("Access-Control-Allow-Headers","*");
