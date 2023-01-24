@@ -1,11 +1,11 @@
 server:
   port: 9700
-  ssl:
-    enabled: true
-    key-alias: gateway-ssl
-    key-store-password: Undefinable##LordsOf{Th@R$ING$Z}
-    key-store: classpath:gateway-ssl.p12
-    key-store-type: PKCS12
+#  ssl:
+#    enabled: true
+#    key-alias: gateway-ssl
+#    key-store-password: Undefinable##LordsOf{Th@R$ING$Z}
+#    key-store: classpath:gateway-ssl.p12
+#    key-store-type: PKCS12
 
 spring:
   application:
@@ -27,9 +27,6 @@ eureka:
     fetch-registry: true
     enabled: on
 
-
-routes:
-  AUTH-SERVER: auth-server
-  WORKFLOW: workflow-service
 IP:
-  WHITELIST: https://test-portal.ekenya.co.ke, http://10.20.2.12
+  WHITELIST: https://localhost
+  WHITELIST-ON: off

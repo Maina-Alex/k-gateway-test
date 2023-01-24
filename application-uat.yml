@@ -23,13 +23,13 @@ eureka:
     prefer-same-zone-eureka: true
     register-with-eureka: true
     serviceUrl:
-      defaultZone: http://localhost:9713/eureka
+      defaultZone: http://10.20.2.12:9713/eureka
     fetch-registry: true
     enabled: on
 
-
-routes:
-  AUTH-SERVER: auth-server
-  WORKFLOW: workflow-service
+logging:
+  file:
+    name: ./logs/${spring.application.name}.log
 IP:
-  WHITELIST: https://test-portal.ekenya.co.ke, http://10.20.2.12
+  WHITELIST: https://10.20.2.12
+  WHITELIST-ON: off

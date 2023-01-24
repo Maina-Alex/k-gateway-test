@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  gateway-service:
+    build: .
+    hostname: gateway-service
+    container_name: loans-edge-service
+    restart: always
+    volumes:
+      - ./GatewayLogs:/app/logs
+    ports:
+      - "9700:9700"
+    networks:
+      - advance-net
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+networks:
+  advance-net:
+    name: advancys-net
+    driver: bridge
+    external: true

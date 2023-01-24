@@ -33,3 +33,4 @@ routes:
   WORKFLOW: workflow-service
 IP:
   WHITELIST: https://${PORTAL_IP}, http://${USSD_IP}
+  WHITELIST-ON: true
