@@ -1,0 +1,65 @@
+2023-01-30 11:04:40.740  INFO 11296 --- [main] c.e.a.ApiGatewayApplicationTests         : Starting ApiGatewayApplicationTests using Java 11.0.13 on Amuriithi-pc with PID 11296 (started by amuriithi in D:\Work\OneDrive - ECLECTICS INTERNATIONAL LTD\Eclectics\Advancys Ms\api-gateway)
+2023-01-30 11:04:40.741  INFO 11296 --- [main] c.e.a.ApiGatewayApplicationTests         : The following 1 profile is active: "uat"
+2023-01-30 11:04:42.384  INFO 11296 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=55721b03-088f-3ba3-b1be-0cb033fb236a
+2023-01-30 11:04:42.553  INFO 11296 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-01-30 11:04:42.557  INFO 11296 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-01-30 11:04:42.561  INFO 11296 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'reactorDeferringLoadBalancerExchangeFilterFunction' of type [org.springframework.cloud.client.loadbalancer.reactive.DeferringLoadBalancerExchangeFilterFunction] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-01-30 11:04:42.785  INFO 11296 --- [main] c.h.instance.DefaultAddressPicker        : [LOCAL] [dev] [3.8.2] Prefer IPv4 stack is true.
+2023-01-30 11:04:43.440  INFO 11296 --- [main] c.h.instance.DefaultAddressPicker        : [LOCAL] [dev] [3.8.2] Picked [192.168.100.17]:5701, using socket ServerSocket[addr=/0:0:0:0:0:0:0:0,localport=5701], bind any local is true
+2023-01-30 11:04:43.452  INFO 11296 --- [main] com.hazelcast.system                     : [192.168.100.17]:5701 [dev] [3.8.2] Hazelcast 3.8.2 (20170518 - a60f944) starting at [192.168.100.17]:5701
+2023-01-30 11:04:43.452  INFO 11296 --- [main] com.hazelcast.system                     : [192.168.100.17]:5701 [dev] [3.8.2] Copyright (c) 2008-2016, Hazelcast, Inc. All Rights Reserved.
+2023-01-30 11:04:43.452  INFO 11296 --- [main] com.hazelcast.system                     : [192.168.100.17]:5701 [dev] [3.8.2] Configured Hazelcast Serialization version : 1
+2023-01-30 11:04:43.771  INFO 11296 --- [main] c.h.s.i.o.impl.BackpressureRegulator     : [192.168.100.17]:5701 [dev] [3.8.2] Backpressure is disabled
+2023-01-30 11:04:44.470  INFO 11296 --- [main] c.h.s.i.o.impl.OperationExecutorImpl     : [192.168.100.17]:5701 [dev] [3.8.2] Starting 8 partition threads
+2023-01-30 11:04:44.471  INFO 11296 --- [main] c.h.s.i.o.impl.OperationExecutorImpl     : [192.168.100.17]:5701 [dev] [3.8.2] Starting 5 generic threads (1 dedicated for priority tasks)
+2023-01-30 11:04:44.476  INFO 11296 --- [main] com.hazelcast.core.LifecycleService      : [192.168.100.17]:5701 [dev] [3.8.2] [192.168.100.17]:5701 is STARTING
+2023-01-30 11:04:45.149  WARN 11296 --- [main] com.hazelcast.instance.Node              : [192.168.100.17]:5701 [dev] [3.8.2] No join method is enabled! Starting standalone.
+2023-01-30 11:04:45.150  INFO 11296 --- [main] com.hazelcast.system                     : [192.168.100.17]:5701 [dev] [3.8.2] Cluster version set to 3.8
+2023-01-30 11:04:45.176  INFO 11296 --- [main] com.hazelcast.core.LifecycleService      : [192.168.100.17]:5701 [dev] [3.8.2] [192.168.100.17]:5701 is STARTED
+2023-01-30 11:04:45.184  INFO 11296 --- [main] com.hazelcast.cache.impl.CacheService    : [192.168.100.17]:5701 [dev] [3.8.2] Added cache config: CacheConfig{name='buckets', managerPrefix='/hz/', inMemoryFormat=BINARY, backupCount=1, hotRestart=HotRestartConfig{enabled=false, fsync=false}}
+2023-01-30 11:04:47.583  INFO 11296 --- [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [After]
+2023-01-30 11:04:47.584  INFO 11296 --- [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Before]
+2023-01-30 11:04:47.584  INFO 11296 --- [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Between]
+2023-01-30 11:04:47.584  INFO 11296 --- [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Cookie]
+2023-01-30 11:04:47.584  INFO 11296 --- [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Header]
+2023-01-30 11:04:47.585  INFO 11296 --- [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Host]
+2023-01-30 11:04:47.585  INFO 11296 --- [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Method]
+2023-01-30 11:04:47.585  INFO 11296 --- [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Path]
+2023-01-30 11:04:47.586  INFO 11296 --- [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Query]
+2023-01-30 11:04:47.586  INFO 11296 --- [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [ReadBody]
+2023-01-30 11:04:47.586  INFO 11296 --- [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [RemoteAddr]
+2023-01-30 11:04:47.586  INFO 11296 --- [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2023-01-30 11:04:47.586  INFO 11296 --- [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [Weight]
+2023-01-30 11:04:47.587  INFO 11296 --- [main] o.s.c.g.r.RouteDefinitionRouteLocator    : Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2023-01-30 11:04:50.190  INFO 11296 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2023-01-30 11:04:50.683  INFO 11296 --- [main] DiscoveryClientOptionalArgsConfiguration : Eureka HTTP Client uses RestTemplate.
+2023-01-30 11:04:50.817  WARN 11296 --- [main] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2023-01-30 11:04:50.862  INFO 11296 --- [main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2023-01-30 11:04:50.971  INFO 11296 --- [main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2023-01-30 11:04:50.981  INFO 11296 --- [main] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2023-01-30 11:04:51.016  INFO 11296 --- [main] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2023-01-30 11:04:51.016  INFO 11296 --- [main] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2023-01-30 11:04:51.016  INFO 11296 --- [main] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2023-01-30 11:04:51.017  INFO 11296 --- [main] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2023-01-30 11:04:51.017  INFO 11296 --- [main] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2023-01-30 11:04:51.017  INFO 11296 --- [main] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2023-01-30 11:04:51.017  INFO 11296 --- [main] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2023-01-30 11:04:51.528  INFO 11296 --- [main] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2023-01-30 11:04:51.531  INFO 11296 --- [main] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
+2023-01-30 11:04:51.536  INFO 11296 --- [main] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2023-01-30 11:04:51.544  INFO 11296 --- [main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1675065891543 with initial instances count: 8
+2023-01-30 11:04:51.551  INFO 11296 --- [main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application API-GATEWAY with eureka with status UP
+2023-01-30 11:04:51.552  INFO 11296 --- [main] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1675065891552, current=UP, previous=STARTING]
+2023-01-30 11:04:51.554  INFO 11296 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_API-GATEWAY/host.docker.internal:api-gateway:9700: registering service...
+2023-01-30 11:04:51.623  INFO 11296 --- [main] c.e.a.ApiGatewayApplicationTests         : Started ApiGatewayApplicationTests in 12.347 seconds (JVM running for 13.634)
+2023-01-30 11:04:51.683  INFO 11296 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_API-GATEWAY/host.docker.internal:api-gateway:9700 - registration status: 204
+2023-01-30 11:04:52.189  INFO 11296 --- [hz.ShutdownThread] com.hazelcast.instance.Node              : [192.168.100.17]:5701 [dev] [3.8.2] Running shutdown hook... Current state: ACTIVE
+2023-01-30 11:04:52.191  INFO 11296 --- [SpringApplicationShutdownHook] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application API-GATEWAY with eureka with status DOWN
+2023-01-30 11:04:52.192  INFO 11296 --- [SpringApplicationShutdownHook] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1675065892192, current=DOWN, previous=UP]
+2023-01-30 11:04:52.192  INFO 11296 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_API-GATEWAY/host.docker.internal:api-gateway:9700: registering service...
+2023-01-30 11:04:52.214  WARN 11296 --- [SpringApplicationShutdownHook] o.s.b.f.support.DisposableBeanAdapter    : Invocation of close method failed on bean with name 'cache': com.hazelcast.core.HazelcastInstanceNotActiveException: Hazelcast instance is not active!
+2023-01-30 11:04:52.215  INFO 11296 --- [SpringApplicationShutdownHook] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
+2023-01-30 11:04:53.986  INFO 11296 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_API-GATEWAY/host.docker.internal:api-gateway:9700 - registration status: 204
+2023-01-30 11:04:53.991  INFO 11296 --- [SpringApplicationShutdownHook] com.netflix.discovery.DiscoveryClient    : Unregistering ...
+2023-01-30 11:04:54.103  INFO 11296 --- [SpringApplicationShutdownHook] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_API-GATEWAY/host.docker.internal:api-gateway:9700 - deregister  status: 200
+2023-01-30 11:04:54.122  INFO 11296 --- [SpringApplicationShutdownHook] com.netflix.discovery.DiscoveryClient    : Completed shut down of DiscoveryClient
