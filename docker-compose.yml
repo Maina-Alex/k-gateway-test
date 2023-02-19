@@ -3,20 +3,20 @@ services:
   gateway-service:
     build: .
     hostname: gateway-service
-    container_name: loans-edge-service
+    container_name: channel-gateway
     restart: always
     volumes:
       - ./GatewayLogs:/app/logs
     ports:
       - "7600:7600"
     networks:
-      - advance-net
+      - channel-net
     deploy:
       resources:
         limits:
           memory: 256M
 networks:
-  advance-net:
-    name: advancys-net
+  channel-net:
+    name: channel-net
     driver: bridge
     external: true
