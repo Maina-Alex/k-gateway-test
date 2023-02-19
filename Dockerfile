@@ -1,6 +1,6 @@
 FROM adoptopenjdk/openjdk11:alpine-slim
 WORKDIR /app
-EXPOSE 9700
+EXPOSE 7600
 COPY api-gateway.jar app.jar
 COPY application.yml application.yml
 COPY application-uat.yml application-uat.yml

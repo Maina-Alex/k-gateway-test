@@ -69,7 +69,6 @@ public class IpThrottlingFilter implements GlobalFilter {
             response.setStatusCode(HttpStatus.OK);
             response.writeWith(Mono.just(bodyDataBuffer));
             exchange.mutate().response(response).build();
-
         }
         return chain.filter(exchange);
     }

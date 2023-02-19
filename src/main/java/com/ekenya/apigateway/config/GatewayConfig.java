@@ -18,19 +18,14 @@ public class GatewayConfig {
     @Bean
     public RouteLocator myRoutes(RouteLocatorBuilder routeLocatorBuilder) {
         return routeLocatorBuilder.routes()
-                .route(p -> p.path("/api/v1/oauth/**")
+                .route(p -> p.path("/oauth/**")
                         .uri("lb://auth-server"))
-                .route(p -> p.path("/api/v1/corporate/**","/api/v1/mpesa/**")
-                        .uri("lb://corporate-service"))
-                .route(p -> p.path("/api/v1/employee/**")
-                        .uri("lb://employee-service"))
-                .route(p -> p.path("/api/v1/bank/**")
-                        .uri("lb://bank-service"))
+                .route(p -> p.path("/api/v1/admin/**")
+                        .uri("lb://USER-SERVICE"))
                 .build();
     }
     @Bean
     public Customizer<ReactiveResilience4JCircuitBreakerFactory> defaultCustomizer() {
-
         return factory -> factory.configureDefault(id -> new Resilience4JConfigBuilder(id)
                 .circuitBreakerConfig(CircuitBreakerConfig
                         .custom()
