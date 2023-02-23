@@ -1,6 +1,5 @@
 server:
-  port: 9700
-
+  port: 7600
 spring:
   profiles:
     active: uat

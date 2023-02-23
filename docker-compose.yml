@@ -2,6 +2,7 @@ version: '3.7'
 services:
   gateway-service:
     build: .
+    image: channel-gateway
     hostname: gateway-service
     container_name: channel-gateway
     restart: always
