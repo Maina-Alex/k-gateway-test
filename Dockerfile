@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11:alpine-slim
+FROM adoptopenjdk/openjdk11:alpine
 WORKDIR /app
 EXPOSE 7600
 COPY api-gateway.jar app.jar

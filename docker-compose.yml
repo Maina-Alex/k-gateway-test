@@ -1,8 +1,7 @@
 version: '3.7'
 services:
   gateway-service:
-    build: .
-    image: channel-gateway
+    image: devops-registry.ekenya.co.ke/channel-manager/channel-gateway:latest
     hostname: gateway-service
     container_name: channel-gateway
     restart: always
