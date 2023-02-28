@@ -19,7 +19,7 @@ public class GatewayConfig {
     public RouteLocator myRoutes(RouteLocatorBuilder routeLocatorBuilder) {
         return routeLocatorBuilder.routes()
                 .route(p -> p.path("/oauth/**")
-                        .uri("lb://auth-server"))
+                        .uri("lb://AUTH-SERVER"))
                 .route(p -> p.path("/api/v1/admin/**")
                         .uri("lb://USER-SERVICE"))
                 .build();
