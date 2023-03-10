@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.ekenya</groupId>
     <artifactId>APIGateway</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>git${git.commit.id.abbrev}-${git.commit.time}</version>
     <name>APIGateway</name>
     <description>APIGateway</description>
     <properties>
@@ -103,7 +103,6 @@
     </dependencyManagement>
 
     <build>
-        <finalName>api-gateway</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -115,6 +114,40 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!--suppress UnresolvedMavenProperty -->
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>4.9.10</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <prefix>git</prefix>
+                    <verbose>true</verbose>
+                    <dateFormat>yyyyMMdd-HHmmss</dateFormat>
                 </configuration>
             </plugin>
         </plugins>
