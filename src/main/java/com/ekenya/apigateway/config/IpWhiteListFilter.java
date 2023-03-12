@@ -44,8 +44,8 @@ public class IpWhiteListFilter  implements GlobalFilter {
             String gsonString = gson.toJson (response);
             DataBuffer bodyDataBuffer = exchange.getResponse ().bufferFactory ().wrap (gsonString.getBytes ());
             exchange.getResponse ().setStatusCode (HttpStatus.OK);
-            exchange.getResponse ().writeWith (Mono.just (bodyDataBuffer)).subscribe ();
-            return exchange.getResponse ().setComplete ();
+            return exchange.getResponse ().writeWith (Mono.just (bodyDataBuffer))
+                    .flatMap (res-> exchange.getResponse ().setComplete ());
         }
         return chain.filter(exchange);
     }

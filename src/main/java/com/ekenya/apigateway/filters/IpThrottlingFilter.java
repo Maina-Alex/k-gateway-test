@@ -41,7 +41,7 @@ public class IpThrottlingFilter implements GlobalFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         BucketConfiguration bucketConfiguration = Bucket4j.configurationBuilder()
-                .addLimit(Bandwidth.simple(15, Duration.ofMinutes(1))) // sets a bucket of 10 tokens for a duration of 1 minute
+                .addLimit(Bandwidth.simple(20, Duration.ofMinutes(1))) // sets a bucket of 20 tokens for a duration of 1 minute
                 .build();
         ServerHttpRequest request = exchange.getRequest();
         ServerHttpResponse response = exchange.getResponse();
@@ -66,9 +66,9 @@ public class IpThrottlingFilter implements GlobalFilter {
             }.getType();
             String gsonString = gson.toJson(responseData, gsonType);
             DataBuffer bodyDataBuffer = response.bufferFactory().wrap(gsonString.getBytes());
-            response.setStatusCode(HttpStatus.OK);
-            response.writeWith(Mono.just(bodyDataBuffer));
-            exchange.mutate().response(response).build();
+            exchange.getResponse ().setStatusCode (HttpStatus.OK);
+            return exchange.getResponse ().writeWith (Mono.just (bodyDataBuffer))
+                    .flatMap (res-> exchange.getResponse ().setComplete ());
         }
         return chain.filter(exchange);
     }
