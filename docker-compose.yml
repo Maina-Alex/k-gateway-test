@@ -9,6 +9,8 @@ services:
       - ./GatewayLogs:/app/logs
     ports:
       - "7600:7600"
+    environment:
+      - server-ip=10.20.2.201
     networks:
       - channel-net
     deploy:

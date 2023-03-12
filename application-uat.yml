@@ -16,7 +16,8 @@ eureka:
     prefer-same-zone-eureka: true
     register-with-eureka: true
     serviceUrl:
-      defaultZone: http://10.20.2.19:7601/eureka
+      #defaultZone: http://10.20.2.19:7601/eureka
+      defaultZone: http://${server-ip}:7601/eureka
     fetch-registry: true
     enabled: on
 
