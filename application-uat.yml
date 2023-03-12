@@ -9,11 +9,6 @@ spring:
   application:
     name: api-gateway
 
-#logging:
-#  file:
-#    path: /logs
-#    name: ${spring.application.name}.log
-
 eureka:
   instance:
     prefer-ip-address: true
