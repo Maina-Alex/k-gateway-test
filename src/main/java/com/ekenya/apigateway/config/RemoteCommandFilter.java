@@ -18,7 +18,6 @@ import java.util.function.Consumer;
  * @created 23/02/2023
  **/
 public class RemoteCommandFilter implements GatewayFilter, Ordered {
-
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest ();
