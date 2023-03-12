@@ -9,6 +9,32 @@ spring:
   application:
     name: api-gateway
 
+  cloud:
+    gateway:
+      routes:
+        - id: authService
+          uri: lb://AUTH-SERVICE
+          predicates:
+            - Path=/oauth/**
+          filters:
+            - RewritePath=/channel/(?<path>.*), /$\{path}
+
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/api/v1/admin/**
+          filters:
+            - RewritePath=/channel/(?<path>.*), /$\{path}
+
+        - id: product-service
+          uri: lb://PRODUCT-SERVICE
+          predicates:
+            - Path=/api/portal/category/**
+            - Path=/api/portal/product/**
+            - Path=/api/v1/mobile/products/**
+          filters:
+            - RewritePath=/channel/(?<path>.*), /$\{path}
+
 eureka:
   instance:
     prefer-ip-address: true
@@ -16,7 +42,6 @@ eureka:
     prefer-same-zone-eureka: true
     register-with-eureka: true
     serviceUrl:
-      #defaultZone: http://10.20.2.19:7601/eureka
       defaultZone: http://${server-ip}:7601/eureka
     fetch-registry: true
     enabled: on
