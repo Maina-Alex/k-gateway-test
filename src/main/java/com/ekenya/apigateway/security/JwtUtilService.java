@@ -38,7 +38,7 @@ public class JwtUtilService {
                 .claim ("jti", UUID.randomUUID ())
                 .claim ("CLIENT_ID", "CHANNEL-AUTH_KEY")
                 .claim ("authorities", authorities)
-                .claim ("role", roles)
+                .claim ("roles", roles)
                 .claim ("SCOPE", "AUTH")
                 .audience ("CHANNEL-MANAGER")
                 .expirationTime (expiryDate)

@@ -76,6 +76,7 @@ public class BasicAuthenticationFilter implements WebFilter {
                     response.getHeaders ().setContentType (MediaType.APPLICATION_JSON);
                     return exchange.getResponse ().writeWith (Mono.just (bodyDataBuffer))
                             .flatMap (exc -> exchange.getResponse ().setComplete ());
-                });
+                })
+                .switchIfEmpty (chain.filter (exchange));
     }
 }

@@ -78,7 +78,8 @@ public class BearerTokenValidationFilter implements WebFilter {
                                         exchange.getRequest ().getHeaders ().set (HttpHeaders.AUTHORIZATION, internalToken);
                                         return chain.filter (exchange);
                                     }
-                                }));
+                                }))
+                .switchIfEmpty (chain.filter (exchange));
     }
 
     public static Mono<String> extract(ServerWebExchange serverWebExchange) {
