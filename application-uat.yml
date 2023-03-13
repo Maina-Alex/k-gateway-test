@@ -34,6 +34,10 @@ spring:
             - Path=/api/v1/mobile/products/**
           filters:
             - RewritePath=/channel/(?<path>.*), /$\{path}
+key:
+  name: channel-auth-ssl.p12
+  alias: channel-auth-ssl
+  password: LordsOf{Th@R$ING$Z}
 
 eureka:
   instance:
@@ -52,3 +56,12 @@ logging:
 IP:
   WHITELIST: https://10.20.2.19
   WHITELIST-ON: off
+
+services:
+  integration:
+    basic:
+      client: channel-service
+      password: Channel-2023$$
+login:
+  endpoints:
+    validate: http://auth-server:7602/oauth/validate
