@@ -54,14 +54,14 @@ logging:
   file:
     name: ./logs/${spring.application.name}.log
 IP:
-  WHITELIST: https://10.20.2.19
+  WHITELIST: https://10.20.2.201
   WHITELIST-ON: off
 
 services:
   integration:
     basic:
       client: channel-service
-      password: Channel-2023$$
+      password: C-sg6OGT4/*8Cy4=
 login:
   endpoints:
     validate: http://auth-server:7602/oauth/validate
