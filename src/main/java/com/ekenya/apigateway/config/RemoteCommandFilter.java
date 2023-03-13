@@ -45,7 +45,7 @@ public class RemoteCommandFilter implements GatewayFilter, Ordered {
 
 
     @Component
-    @Order(Ordered.HIGHEST_PRECEDENCE)
+    @Order(1)
     static class RemoteCommandFilterFactory implements GatewayFilterFactory<Object> {
 
         @Override

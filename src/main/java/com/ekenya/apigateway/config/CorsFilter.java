@@ -2,6 +2,7 @@ package com.ekenya.apigateway.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.LinkedMultiValueMap;
@@ -19,6 +20,7 @@ import reactor.core.publisher.Mono;
  * @created 17/03/2022
  **/
 @Configuration
+@Order(3)
 public class CorsFilter implements WebFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {

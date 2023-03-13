@@ -23,7 +23,7 @@ import java.util.Map;
  * @created 15/09/2022
  **/
 @Configuration
-@Order(Ordered.HIGHEST_PRECEDENCE)
+@Order(2)
 @RequiredArgsConstructor
 @Slf4j
 public class IpWhiteListFilter  implements GlobalFilter {
