@@ -41,14 +41,16 @@ public class BasicAuthenticationFilter implements WebFilter {
     private final JwtUtilService jwtUtilService;
     private static final String BASIC = "Basic ";
     //prevents matching Auth server channel key header
-    private static  final Predicate<ServerWebExchange> notMatchesAuthRoute= serverWebExchange -> !serverWebExchange.getRequest ().getURI ().getPath ().contains ("oauth");
+    private static  final Predicate<ServerWebExchange> notMatchesAuthRoute= serverWebExchange -> !serverWebExchange.getRequest ().getPath ().contextPath ().value ().contains ("oauth");
     private static final Predicate<String> matchBasicLength = authValue -> authValue.length () > BASIC.length ();
     private static final Function<String, Mono<String>> isolateBasicValue = authValue -> Mono.justOrEmpty (authValue.substring (BASIC.length ()));
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
+        if(exchange.getRequest ().getURI ().getPath ().contains ("oauth")){
+            return chain.filter (exchange);
+        }
         return Mono.justOrEmpty (exchange)
-                .filter (notMatchesAuthRoute)
                 .flatMap (BearerTokenValidationFilter::extract)
                 .filter (matchBasicLength)
                 .flatMap (isolateBasicValue)
@@ -74,7 +76,7 @@ public class BasicAuthenticationFilter implements WebFilter {
                     ServerHttpResponse response = exchange.getResponse ();
                     DataBuffer bodyDataBuffer = exchange.getResponse ().bufferFactory ()
                             .wrap (gson.toJson (UniversalResponse.builder ()
-                                    .status (400).message ("Failed to validate session.").build ()).getBytes ());
+                                    .status (400).message (err.getMessage ()).build ()).getBytes ());
                     response.setStatusCode (HttpStatus.UNAUTHORIZED);
                     response.getHeaders ().setContentType (MediaType.APPLICATION_JSON);
                     return exchange.getResponse ().writeWith (Mono.just (bodyDataBuffer))
