@@ -29,6 +29,7 @@ public class CorsFilter implements WebFilter {
         headers.add("Access-Control-Allow-Credentials" , "true");
         headers.add ("Strict-Transport-Security", "max-age=36500 ; includeSubDomains ; preload");
         headers.add("Content-Security-Policy","default-src 'self' https:; font-src 'self' https: data:; img-src 'self' https: data:; object-src 'none'; script-src https:; style-src 'self' https: 'unsafe-inline'");
+        headers.add ("Referrer-Policy", "strict-origin-when-cross-origin");
         exchange.getResponse().getHeaders().addAll(headers);
 
         if (exchange.getRequest().getMethod() == HttpMethod.OPTIONS) {
@@ -38,13 +39,13 @@ public class CorsFilter implements WebFilter {
         return chain.filter(exchange);
     }
 
-    @Bean
-    public WebFilter referrerPolicyFilter() {
-        return (exchange, chain) -> {
-            exchange.getResponse().getHeaders().set("Referrer-Policy", "strict-origin-when-cross-origin");
-            return chain.filter(exchange);
-        };
-    }
+//    @Bean
+//    public WebFilter referrerPolicyFilter() {
+//        return (exchange, chain) -> {
+//            exchange.getResponse().getHeaders().set("Referrer-Policy", "strict-origin-when-cross-origin");
+//            return chain.filter(exchange);
+//        };
+//    }
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();

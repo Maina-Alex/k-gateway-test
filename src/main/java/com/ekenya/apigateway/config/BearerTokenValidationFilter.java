@@ -60,7 +60,7 @@ public class BearerTokenValidationFilter implements WebFilter {
                                 .bodyToMono (UniversalResponse.class)
                                 .onErrorResume (err -> {
                                     log.error ("An error occurred validating token", err);
-                                    return Mono.just (UniversalResponse.builder ().status (400).message ("Failed to validate session.").build ());
+                                    return Mono.just (UniversalResponse.builder ().status (400).message (err.getMessage ()).build ());
                                 })
                                 .flatMap (res -> {
                                     if (res.getStatus () == 400) {
@@ -68,10 +68,10 @@ public class BearerTokenValidationFilter implements WebFilter {
                                                 .wrap (gson.toJson (UniversalResponse.builder ()
                                                         .status (400).message ("Failed to validate session.").build ()).getBytes ());
                                         ServerHttpResponse response = exchange.getResponse ();
-                                        response.setStatusCode (HttpStatus.UNAUTHORIZED);
                                         response.getHeaders ().setContentType (MediaType.APPLICATION_JSON);
-                                        return exchange.getResponse ().writeWith (Mono.just (bodyDataBuffer))
-                                                .flatMap (exc -> exchange.getResponse ().setComplete ());
+                                        response.setStatusCode (HttpStatus.UNAUTHORIZED);
+                                        return response.writeWith (Mono.just (bodyDataBuffer))
+                                                .flatMap (exc -> response.setComplete ());
                                     } else {
                                         Map<String, Object> result = (Map<String, Object>) res.getData ();
                                         String userName = (String) result.get ("username");

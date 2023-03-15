@@ -4,6 +4,7 @@ import com.ekenya.apigateway.model.UniversalResponse;
 import com.ekenya.apigateway.security.JwtUtilService;
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -32,6 +33,7 @@ import java.util.function.Predicate;
 @RequiredArgsConstructor
 @Configuration
 @Order(5)
+@Slf4j
 public class BasicAuthenticationFilter implements WebFilter {
     @Value("${services.integration.basic.client}")
     private String clientSecret;
@@ -73,14 +75,15 @@ public class BasicAuthenticationFilter implements WebFilter {
                     return chain.filter (exchange);
                 })
                 .onErrorResume (err -> {
+                    log.error ("An error occurred on basic auth filter",err);
                     ServerHttpResponse response = exchange.getResponse ();
                     DataBuffer bodyDataBuffer = exchange.getResponse ().bufferFactory ()
                             .wrap (gson.toJson (UniversalResponse.builder ()
                                     .status (400).message (err.getMessage ()).build ()).getBytes ());
-                    response.setStatusCode (HttpStatus.UNAUTHORIZED);
                     response.getHeaders ().setContentType (MediaType.APPLICATION_JSON);
-                    return exchange.getResponse ().writeWith (Mono.just (bodyDataBuffer))
-                            .flatMap (exc -> exchange.getResponse ().setComplete ());
+                    response.setStatusCode (HttpStatus.UNAUTHORIZED);
+                    return response.writeWith (Mono.just (bodyDataBuffer))
+                            .flatMap (exc -> response.setComplete ());
                 })
                 .switchIfEmpty (chain.filter (exchange));
     }
