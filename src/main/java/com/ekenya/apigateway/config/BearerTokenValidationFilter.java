@@ -44,6 +44,9 @@ public class BearerTokenValidationFilter implements WebFilter {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
+        if(exchange.getRequest ().getURI ().getPath ().contains ("oauth")){
+            return chain.filter (exchange);
+        }
         return Mono.justOrEmpty (exchange)
                 .flatMap (BearerTokenValidationFilter::extract)
                 .filter (matchBearerLength)
