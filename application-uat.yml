@@ -15,25 +15,25 @@ spring:
         - id: authService
           uri: lb://AUTH-SERVICE
           predicates:
-            - Path=/oauth/**
+            - Path=/channel/oauth/**
           filters:
-            - RewritePath=/channel/(?<path>.*), /$\{path}
+            - RewritePath=/channel/(?<segment>.*), /${segment}
 
         - id: user-service
           uri: lb://USER-SERVICE
           predicates:
-            - Path=/api/v1/admin/**
+            - Path=/channel/api/v1/admin/**
           filters:
-            - RewritePath=/channel/(?<path>.*), /$\{path}
+            - RewritePath=/channel/(?<segment>.*), /${segment}
 
         - id: product-service
           uri: lb://PRODUCT-SERVICE
           predicates:
-            - Path=/api/portal/category/**
-            - Path=/api/portal/product/**
-            - Path=/api/v1/mobile/products/**
+            - Path=/channel/api/portal/category/**
+            - Path=/channel/api/portal/product/**
+            - Path=/channel/api/v1/mobile/products/**
           filters:
-            - RewritePath=/channel/(?<path>.*), /$\{path}
+            - RewritePath=/channel/(?<segment>.*), /${segment}
 key:
   name: channel-auth-ssl.p12
   alias: channel-auth-ssl
@@ -46,7 +46,7 @@ eureka:
     prefer-same-zone-eureka: true
     register-with-eureka: true
     serviceUrl:
-      defaultZone: http://${server-ip}:7601/eureka
+      defaultZone: http://10.20.2.201:7601/eureka
     fetch-registry: true
     enabled: on
 
