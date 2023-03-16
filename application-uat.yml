@@ -48,7 +48,7 @@ eureka:
     serviceUrl:
       defaultZone: http://10.20.2.201:7601/eureka
     fetch-registry: true
-    enabled: off
+    enabled: on
 
 logging:
   file:

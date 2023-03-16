@@ -79,7 +79,7 @@ public class BearerTokenValidationFilter implements WebFilter {
                                         Map<String, Object> result = (Map<String, Object>) res.getData ();
                                         String userName = (String) result.get ("username");
                                         List<String> authorities = (List<String>) result.get ("roles");
-                                        String internalToken = jwtUtilService.generateJwt (userName, authorities,List.of ("CHANNEL-USER"));
+                                        String internalToken = jwtUtilService.generateJwt (userName, authorities,List.of ("CHANNEL-ADMIN"));
                                         HttpHeaders newHeaders= new HttpHeaders ();
                                         newHeaders.add (INTERNAL_TOKEN_HEADER, BEARER +internalToken);
                                         ServerHttpRequest newRequest = exchange.getRequest().mutate().headers(h -> h.addAll(newHeaders)).build();
