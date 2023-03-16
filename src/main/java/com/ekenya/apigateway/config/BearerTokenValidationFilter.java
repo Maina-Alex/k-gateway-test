@@ -20,6 +20,7 @@ import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -77,9 +78,8 @@ public class BearerTokenValidationFilter implements WebFilter {
                                     } else {
                                         Map<String, Object> result = (Map<String, Object>) res.getData ();
                                         String userName = (String) result.get ("username");
-                                        List<String> roles = (List<String>) result.get ("roles");
-                                        List<String> authorities = (List<String>) result.get ("permissions");
-                                        String internalToken = jwtUtilService.generateJwt (userName, roles, authorities);
+                                        List<String> authorities = (List<String>) result.get ("roles");
+                                        String internalToken = jwtUtilService.generateJwt (userName, authorities,List.of ("CHANNEL-USER"));
                                         HttpHeaders newHeaders= new HttpHeaders ();
                                         newHeaders.add (INTERNAL_TOKEN_HEADER, BEARER +internalToken);
                                         ServerHttpRequest newRequest = exchange.getRequest().mutate().headers(h -> h.addAll(newHeaders)).build();

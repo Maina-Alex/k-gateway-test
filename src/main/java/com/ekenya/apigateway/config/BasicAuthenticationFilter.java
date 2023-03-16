@@ -74,7 +74,6 @@ public class BasicAuthenticationFilter implements WebFilter {
                     if (!username.equals (clientSecret) || !password.equals (clientPassword)) {
                         return Mono.error (new IllegalArgumentException ("Invalid credentials"));
                     }
-
                     String internalToken = jwtUtilService.generateJwt ("INTEGRATOR", new ArrayList<> (),
                             List.of ("INTEGRATOR"));
                     HttpHeaders newHeaders= new HttpHeaders ();
