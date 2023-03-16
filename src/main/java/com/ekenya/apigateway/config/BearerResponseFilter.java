@@ -12,18 +12,19 @@ import reactor.core.publisher.Mono;
  * @author Alex Maina
  * @created 13/03/2023
  *
- * Removes sensitive Authorization header key from transit
+ * Removes sensitive Internal Authorization header key from transit
  * Key could be an internal bearer key, thus why we are removing it from the response
  **/
 
 @Configuration
 @Order(6)
 public class BearerResponseFilter implements WebFilter {
+    private static final String INTERNAL_TOKEN_HEADER ="INTERNAL_TOKEN";
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
-        if(exchange.getResponse ().getHeaders ().containsKey ("Authorization")){
+        if(exchange.getResponse ().getHeaders ().containsKey (INTERNAL_TOKEN_HEADER)){
             ServerHttpResponse response= exchange.getResponse ();
-             response.getHeaders ().remove ("Authorization");
+             response.getHeaders ().remove (INTERNAL_TOKEN_HEADER);
              exchange.mutate ().response (response);
              return chain.filter (exchange);
         }

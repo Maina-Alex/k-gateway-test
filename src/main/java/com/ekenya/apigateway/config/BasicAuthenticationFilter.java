@@ -12,6 +12,7 @@ import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilter;
@@ -42,9 +43,14 @@ public class BasicAuthenticationFilter implements WebFilter {
     private final Gson gson;
     private final JwtUtilService jwtUtilService;
     private static final String BASIC = "Basic ";
+    private static final String INTERNAL_TOKEN_HEADER ="INTERNAL_TOKEN";
+    private static final String BEARER = "Bearer ";
     //prevents matching Auth server channel key header
-    private static  final Predicate<ServerWebExchange> notMatchesAuthRoute= serverWebExchange -> !serverWebExchange.getRequest ().getPath ().contextPath ().value ().contains ("oauth");
-    private static final Predicate<String> matchBasicLength = authValue -> authValue.length () > BASIC.length ();
+    private static final Predicate<String> matchBasicLength = authValue -> {
+        String [] bearerSplit= authValue.split (" ");
+        if(bearerSplit.length<2) return false;
+        return bearerSplit[0].length ()== BASIC.trim ().length ();
+    };
     private static final Function<String, Mono<String>> isolateBasicValue = authValue -> Mono.justOrEmpty (authValue.substring (BASIC.length ()));
 
     @Override
@@ -71,8 +77,10 @@ public class BasicAuthenticationFilter implements WebFilter {
 
                     String internalToken = jwtUtilService.generateJwt ("INTEGRATOR", new ArrayList<> (),
                             List.of ("INTEGRATOR"));
-                    exchange.getRequest ().getHeaders ().set (HttpHeaders.AUTHORIZATION, internalToken);
-                    return chain.filter (exchange);
+                    HttpHeaders newHeaders= new HttpHeaders ();
+                    newHeaders.add (INTERNAL_TOKEN_HEADER, BEARER +internalToken);
+                    ServerHttpRequest newRequest = exchange.getRequest().mutate().headers(h -> h.addAll(newHeaders)).build();
+                    return chain.filter(exchange.mutate().request(newRequest).build());
                 })
                 .onErrorResume (err -> {
                     log.error ("An error occurred on basic auth filter",err);

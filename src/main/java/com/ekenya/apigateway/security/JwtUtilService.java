@@ -52,6 +52,6 @@ public class JwtUtilService {
         SignedJWT signedJWT = new SignedJWT (jwsHeader, claimsSet);
         RSASSASigner signer = new RSASSASigner (keysConfig.privateKey ());
         signedJWT.sign (signer);
-        return signedJWT.toString ();
+        return signedJWT.serialize ();
     }
 }

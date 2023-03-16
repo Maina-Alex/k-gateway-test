@@ -12,6 +12,7 @@ import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ServerWebExchange;
@@ -42,6 +43,7 @@ public class BearerTokenValidationFilter implements WebFilter {
     private static final Predicate<String> matchBearerLength = authValue -> authValue.length () > BEARER.length ();
     private static final Function<String, Mono<String>> isolateBearerValue = authValue -> Mono.justOrEmpty (authValue.substring (BEARER.length ()));
 
+    private static final String INTERNAL_TOKEN_HEADER ="INTERNAL_TOKEN";
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         if(exchange.getRequest ().getURI ().getPath ().contains ("oauth")){
@@ -52,7 +54,7 @@ public class BearerTokenValidationFilter implements WebFilter {
                 .filter (matchBearerLength)
                 .flatMap (isolateBearerValue)
                 .flatMap (bearerToken ->
-                        loadBalancedWebClientBuilder.build ()
+                        WebClient.create ()
                                 .post ()
                                 .uri (tokenValidationEndpoint)
                                 .body (Mono.just (Map.of ("token", bearerToken)), Object.class)
@@ -78,9 +80,10 @@ public class BearerTokenValidationFilter implements WebFilter {
                                         List<String> roles = (List<String>) result.get ("roles");
                                         List<String> authorities = (List<String>) result.get ("permissions");
                                         String internalToken = jwtUtilService.generateJwt (userName, roles, authorities);
-                                        exchange.getRequest ().getHeaders ().set (HttpHeaders.AUTHORIZATION, internalToken);
-                                        return chain.filter (exchange);
-                                    }
+                                        HttpHeaders newHeaders= new HttpHeaders ();
+                                        newHeaders.add (INTERNAL_TOKEN_HEADER, BEARER +internalToken);
+                                        ServerHttpRequest newRequest = exchange.getRequest().mutate().headers(h -> h.addAll(newHeaders)).build();
+                                        return chain.filter(exchange.mutate().request(newRequest).build());                                    }
                                 }))
                 .switchIfEmpty (chain.filter (exchange));
     }
