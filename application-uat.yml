@@ -48,7 +48,7 @@ eureka:
     serviceUrl:
       defaultZone: http://10.20.2.201:7601/eureka
     fetch-registry: true
-    enabled: on
+    enabled: off
 
 logging:
   file:
@@ -64,4 +64,4 @@ services:
       password: C-sg6OGT4/*8Cy4=
 login:
   endpoints:
-    validate: http://auth-server:7602/oauth/validate
+    validate: http://10.20.2.201:7602/oauth/validate
