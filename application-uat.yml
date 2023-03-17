@@ -17,23 +17,21 @@ spring:
           predicates:
             - Path=/channel/oauth/**
           filters:
-            - RewritePath=/channel/(?<segment>.*), /${segment}
+            - RewritePath=/channel(?<remainingPath>.*), /$\{remainingPath}
 
         - id: user-service
           uri: lb://USER-SERVICE
           predicates:
             - Path=/channel/api/v1/admin/**
           filters:
-            - RewritePath=/channel/(?<segment>.*), /${segment}
+            - RewritePath=/channel(?<remainingPath>.*), /$\{remainingPath}
 
         - id: product-service
           uri: lb://PRODUCT-SERVICE
           predicates:
-            - Path=/channel/api/portal/category/**
-            - Path=/channel/api/portal/product/**
-            - Path=/channel/api/v1/mobile/products/**
+            - Path=/product/**
           filters:
-            - RewritePath=/channel/(?<segment>.*), /${segment}
+            - RewritePath=/channel(?<remainingPath>.*), /$\{remainingPath}
 key:
   name: channel-auth-ssl.p12
   alias: channel-auth-ssl
