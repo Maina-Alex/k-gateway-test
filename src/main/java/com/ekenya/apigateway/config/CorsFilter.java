@@ -51,6 +51,7 @@ public class CorsFilter implements WebFilter {
         CorsConfiguration config = new CorsConfiguration();
         config.addAllowedOrigin("https://test-portal.ekenya.co.ke");
         config.addAllowedOrigin("http://localhost");
+        config.addAllowedOrigin ("http://localhost:4200");
         config.addAllowedMethod("POST");
         config.addAllowedMethod ("GET");
         config.addAllowedMethod ("OPTIONS");
