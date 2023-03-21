@@ -1,4 +1,4 @@
-package com.ekenya.apigateway.filters;
+package com.ekenya.apigateway.config;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -11,9 +11,11 @@ import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.buffer.DataBuffer;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
+import org.springframework.http.server.reactive.ServerHttpResponseDecorator;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
@@ -54,9 +56,16 @@ public class IpThrottlingFilter implements GlobalFilter {
         ConsumptionProbe probe = bucket.tryConsumeAndReturnRemaining(1);
 
         if (probe.isConsumed()) {
-            //the limit is not consumed
-            response.getHeaders().add("X-Rate-Limit-Remaining",String.valueOf (probe.getRemainingTokens()));
-            exchange.mutate().response(response).build();
+            ServerHttpResponse decoratedResponse = new ServerHttpResponseDecorator (response) {
+                @Override
+                public HttpHeaders getHeaders() {
+                    HttpHeaders headers = new HttpHeaders();
+                    headers.addAll(super.getHeaders());
+                    headers.add ("X-Rate-Limit-Remaining", String.valueOf (probe.getRemainingTokens()));
+                    return headers;
+                }
+            };
+            return chain.filter(exchange.mutate().response(decoratedResponse).build());
         } else {
             Gson gson = new Gson();
             Map<String, String> responseData = new LinkedHashMap<>();
