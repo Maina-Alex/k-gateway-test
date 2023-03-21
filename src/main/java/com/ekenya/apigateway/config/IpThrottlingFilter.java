@@ -79,7 +79,6 @@ public class IpThrottlingFilter implements GlobalFilter {
             return exchange.getResponse ().writeWith (Mono.just (bodyDataBuffer))
                     .flatMap (res-> exchange.getResponse ().setComplete ());
         }
-        return chain.filter(exchange);
     }
 
 }
