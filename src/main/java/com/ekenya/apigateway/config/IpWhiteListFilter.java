@@ -35,6 +35,7 @@ public class IpWhiteListFilter  implements GlobalFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String IP_RANGE= exchange.getRequest ().getURI ().getScheme ()+"://"+exchange.getRequest ().getURI ().getHost ();
+        log.info ("Accessing resource {}", exchange.getRequest ().getURI ().getPath ());
         log.info ("IP RANGE {}", IP_RANGE);
         if(whiteListOn && !ipWhiteListRange.contains (IP_RANGE)){
             log.info ("Un-whitelisted ip address {}",IP_RANGE);
