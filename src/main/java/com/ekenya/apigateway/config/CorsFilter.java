@@ -17,6 +17,7 @@ import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * @author Alex Maina
@@ -28,11 +29,13 @@ public class CorsFilter implements WebFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         MultiValueMap<String,String> headers= new LinkedMultiValueMap<>();
+        headers.add("Access-Control-Allow-Origin", "*");
+        headers.add("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
+        headers.add("Access-Control-Allow-Headers","*");
         headers.add("Access-Control-Expose-Headers","*");
+        headers.add("Access-Control-Allow-Credentials" , "true");
         headers.add ("Strict-Transport-Security", "max-age=36500 ; includeSubDomains ; preload");
         headers.add("Content-Security-Policy","default-src 'self' https:; font-src 'self' https: data:; img-src 'self' https: data:; object-src 'none'; script-src https:; style-src 'self' https: 'unsafe-inline'");
-        headers.add ("Referrer-Policy", "strict-origin-when-cross-origin");
-        headers.add ("Access-Control-Allow-Origin","*");
         exchange.getResponse().getHeaders().addAll(headers);
 
         if (exchange.getRequest().getMethod() == HttpMethod.OPTIONS) {
@@ -42,19 +45,16 @@ public class CorsFilter implements WebFilter {
         return chain.filter(exchange);
     }
 
-    @Bean
-    public CorsWebFilter corsWebFilter() {
-        CorsConfiguration corsConfig = new CorsConfiguration();
-        corsConfig.setAllowedOrigins(Arrays.asList("*","http://test-portal.ekenya.co.ke","http://localhost:4200"));
-        corsConfig.setMaxAge(3600L);
-        corsConfig.addAllowedMethod("POST");
-        corsConfig.addAllowedHeader ("OPTIONS");
-        corsConfig.addAllowedHeader("Authorization");
-        corsConfig.addAllowedHeader("content-type");
-        corsConfig.addAllowedHeader ("Access-Control-Allow-Credentials");
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", corsConfig);
-
-        return new CorsWebFilter(source);
-    }
+//    @Bean
+//    public CorsWebFilter corsWebFilter() {
+//        CorsConfiguration corsConfig = new CorsConfiguration();
+//        corsConfig.setAllowedOrigins(Arrays.asList("*","http://test-portal.ekenya.co.ke","http://localhost:4200"));
+//        corsConfig.setMaxAge(3600L);
+//        corsConfig.addAllowedMethod("POST");
+//        corsConfig.setAllowedHeaders(Collections.singletonList("*"));
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", corsConfig);
+//
+//        return new CorsWebFilter(source);
+//    }
 }
