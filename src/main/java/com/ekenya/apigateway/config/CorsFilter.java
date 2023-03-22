@@ -50,7 +50,7 @@ public class CorsFilter implements WebFilter {
         corsConfig.addAllowedMethod("POST");
         corsConfig.addAllowedHeader ("OPTIONS");
         corsConfig.addAllowedHeader("Authorization");
-        corsConfig.addAllowedHeader("Content-Type");
+        corsConfig.addAllowedHeader("content-type");
         corsConfig.addAllowedHeader ("Access-Control-Allow-Credentials");
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfig);
