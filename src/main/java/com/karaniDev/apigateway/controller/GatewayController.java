@@ -1,4 +1,4 @@
-package com.ekenya.apigateway.controller;
+package com.karaniDev.apigateway.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

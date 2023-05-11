@@ -1,4 +1,4 @@
-package com.ekenya.apigateway.config;
+package com.karaniDev.apigateway.config;
 
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;

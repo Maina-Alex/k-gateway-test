@@ -1,4 +1,4 @@
-package com.ekenya.apigateway.model;
+package com.karaniDev.apigateway.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;

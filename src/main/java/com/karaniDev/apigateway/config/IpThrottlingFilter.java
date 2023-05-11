@@ -1,4 +1,4 @@
-package com.ekenya.apigateway.config;
+package com.karaniDev.apigateway.config;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

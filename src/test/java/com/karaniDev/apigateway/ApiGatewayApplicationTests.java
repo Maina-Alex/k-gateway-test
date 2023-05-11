@@ -1,4 +1,4 @@
-package com.ekenya.apigateway;
+package com.karaniDev.apigateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

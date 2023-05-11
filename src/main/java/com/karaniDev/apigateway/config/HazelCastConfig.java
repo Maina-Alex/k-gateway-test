@@ -1,4 +1,4 @@
-package com.ekenya.apigateway.config;
+package com.karaniDev.apigateway.config;
 
 import com.hazelcast.config.CacheSimpleConfig;
 import com.hazelcast.config.Config;

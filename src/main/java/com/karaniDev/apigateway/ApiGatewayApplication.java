@@ -1,4 +1,4 @@
-package com.ekenya.apigateway;
+package com.karaniDev.apigateway;
 import com.google.gson.Gson;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
